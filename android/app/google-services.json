@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "571563589094",
+    "project_id": "event-flow-7b127",
+    "storage_bucket": "event-flow-7b127.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571563589094:android:4e462cf70b86a2a0faea27",
+        "android_client_info": {
+          "package_name": "com.example.event_flow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJpYXGv07ptc0SANWbZt8ePXgAP6viITU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571563589094:android:6eb74320600a5eb7faea27",
+        "android_client_info": {
+          "package_name": "com.example.event_m"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJpYXGv07ptc0SANWbZt8ePXgAP6viITU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
