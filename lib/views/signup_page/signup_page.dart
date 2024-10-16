@@ -1,3 +1,4 @@
+import 'package:event_flow/views/home/home_screen.dart';
 import 'package:event_flow/views/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,8 @@ class SignUpPage extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(()=>   LoginPage());
+                  //Get.to(()=>   LoginPage());
+                  Get.to(() => HomeScreen(showLoginButton: false));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,

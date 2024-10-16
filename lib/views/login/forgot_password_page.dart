@@ -13,7 +13,7 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: const Text('Forgot Password'),backgroundColor: Colors.blueAccent,),
+        appBar: AppBar(title: const Text('Forgot Password'),backgroundColor: Colors.yellow,),
         body: Container(
           decoration: gradientBackground(), // Applying gradient background
           child: Padding(

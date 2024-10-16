@@ -1,3 +1,4 @@
+import 'package:event_flow/views/home/home_screen.dart';
 import 'package:event_flow/views/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -130,7 +131,9 @@ class OnBoardingScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),  // Rounded corners for button
                             ),
                             onPressed: () {
-                              Get.to(() => LoginPage());
+                             // Get.to(() => LoginPage());
+                              //Get.to(() => HomeScreen());
+                              Get.to(() => HomeScreen(showLoginButton: true));
                             },
                             child: Text(
                               "Get Started",

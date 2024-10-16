@@ -1,18 +1,24 @@
+import 'package:event_flow/controller/creat_event_controller.dart';
+import 'package:event_flow/views/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controller/creat_event_controller.dart';
 
 class HomeScreen extends StatelessWidget {
+  final bool showLoginButton;  // New parameter to determine whether to show the login button
   final AddEventController controller = Get.find<AddEventController>();
 
-  HomeScreen({super.key});
+  HomeScreen({super.key, this.showLoginButton = false});  // Default to false if not provided
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Homepage'),
+          backgroundColor: Colors.yellow,
+        ),
+        body: Container(
           decoration: const BoxDecoration(
             gradient: RadialGradient(
               colors: [
@@ -99,6 +105,32 @@ class HomeScreen extends StatelessWidget {
                   }
                 }),
               ),
+              const Spacer(),
+              if (showLoginButton) // Conditionally show the login button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(() => LoginPage());  // Navigate to LoginPage
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      backgroundColor: const Color(0xFF004aad),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
