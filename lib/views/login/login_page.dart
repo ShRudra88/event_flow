@@ -1,13 +1,34 @@
-import 'package:event_flow/views/login/forgot_password_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../helping_widgets/common_gradient_backgroud.dart';
 import '../bottom_nav_view/bottom_bar_view.dart';
 import '../signup_page/signup_page.dart';
+import 'forgot_password_page.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+   LoginPage({super.key});
+
+  Future<void> _login(BuildContext context) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      // Redirect to BottomBarView upon successful login
+      Get.off(() => const BottomBarView());
+    } catch (e) {
+      Get.snackbar('Login Failed', e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +50,7 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   hintText: 'Email',
                   filled: true,
@@ -40,6 +62,7 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: passwordController,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   filled: true,
@@ -53,7 +76,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(const BottomBarView()); // Normal login
+                  _login(context); // Trigger login with Firebase
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
@@ -68,7 +91,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
-                  Get.to(const BottomBarView(isAdmin: true)); // Login as admin
+                  Get.to(() => const BottomBarView(isAdmin: true)); // Admin login
                 },
                 child: const Text(
                   'Log in as Admin',
@@ -78,7 +101,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
-                  Get.to(const SignUpPage());
+                  Get.to(() => const SignUpPage()); // Navigate to Sign Up
                 },
                 child: const Text(
                   'Sign Up',
@@ -88,7 +111,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
-                  Get.to(ForgotPasswordPage());
+                  Get.to(() => ForgotPasswordPage()); // Navigate to Forgot Password
                 },
                 child: const Text(
                   'Forgot password',

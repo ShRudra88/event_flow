@@ -11,31 +11,33 @@ class ForgotPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Forgot Password')),
-      body: Container(
-        decoration: gradientBackground(), // Applying gradient background
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Forgot Password'),backgroundColor: Colors.blueAccent,),
+        body: Container(
+          decoration: gradientBackground(), // Applying gradient background
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Trigger OTP sending logic here
-                  Get.to(() => OtpPage());
-                },
-                child: const Text('Send OTP'),
-              ),
-            ],
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Trigger OTP sending logic here
+                    Get.to(() => OtpPage());
+                  },
+                  child: const Text('Send OTP'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

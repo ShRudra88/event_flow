@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../helping_widgets/common_gradient_backgroud.dart';
 
+
+//  rudra
+
+
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
@@ -61,7 +65,7 @@ class SignUpPage extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(()=>  const LoginPage());
+                  Get.to(()=>   LoginPage());
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,

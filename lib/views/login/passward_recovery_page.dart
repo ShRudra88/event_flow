@@ -41,7 +41,7 @@ class PasswordRecoveryPage extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(const LoginPage());
+                  Get.to( LoginPage());
                 },
                 child: const Text('Reset Password'),
               ),
