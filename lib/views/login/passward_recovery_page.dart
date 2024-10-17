@@ -13,7 +13,8 @@ class PasswordRecoveryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Reset Password')),
+      appBar: AppBar(title: const Text('Reset Password'),backgroundColor: Colors.blue),
+
       body: Container(
         decoration: gradientBackground(), // Applying gradient background
         child: Padding(

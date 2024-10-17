@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Homepage'),
-          backgroundColor: Colors.yellow,
+          backgroundColor: Colors.blue,
         ),
         body: Container(
           decoration: const BoxDecoration(
