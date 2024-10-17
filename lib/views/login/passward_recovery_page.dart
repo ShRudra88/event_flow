@@ -1,7 +1,7 @@
+/*
 import 'package:event_flow/views/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../helping_widgets/common_gradient_backgroud.dart';
 
 class PasswordRecoveryPage extends StatelessWidget {
@@ -53,3 +53,4 @@ class PasswordRecoveryPage extends StatelessWidget {
     );
   }
 }
+*/

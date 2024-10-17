@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                   'Department of CSE',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.grey[600],
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -60,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                   'Batch: CSE 20',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.grey[600],
+                    color: Colors.black,
                   ),
                 ),
               ],

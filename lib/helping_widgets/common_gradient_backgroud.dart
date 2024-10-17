@@ -4,9 +4,9 @@ BoxDecoration gradientBackground() {
   return const BoxDecoration(
     gradient: RadialGradient(
       colors: [
-        Color(0xFFcb6ce6),
-        Color(0xFF6a4bc3),
-        Color(0xFF004aad),
+        Color(0xff2d9510),
+        Color(0xff65c34b),
+        Color(0xff5900ad),
       ],
       radius: 1.2,
       center: Alignment(0.0, 0.0),
