@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'controller/creat_event_controller.dart';
 import 'views/onboarding_screen/onboarding_screen.dart';
 
+
 void main() async{
   Get.put(AddEventController());
   await Firebase.initializeApp(

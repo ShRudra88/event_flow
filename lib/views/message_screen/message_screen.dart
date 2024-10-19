@@ -31,6 +31,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   Widget _buildMessageBubble(String message, bool isMe) {
     return Align(
+     // decoration: gradientBackground(),
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -41,6 +42,7 @@ class _MessageScreenState extends State<MessageScreen> {
         ),
         child: Text(
           message,
+
           style: TextStyle(
             color: isMe ? Colors.white : Colors.black,
             fontSize: 16,
@@ -54,10 +56,13 @@ class _MessageScreenState extends State<MessageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: const Text('Messaging Screen'),
+
         centerTitle: true,
       ),
       body: Container(
+
         decoration: gradientBackground(), // Applying the gradient background
         child: Column(
           children: [
@@ -106,3 +111,5 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 }
+
+

@@ -1,11 +1,18 @@
+/*
 import 'package:event_flow/views/login/passward_recovery_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:email_auth/email_auth.dart';
 import '../../helping_widgets/common_gradient_backgroud.dart';
 
 class OtpPage extends StatelessWidget {
   final TextEditingController otpController = TextEditingController();
+
+  void sendOTP() async{
+
+  }
+
+
 
   OtpPage({super.key});
 
@@ -44,3 +51,4 @@ class OtpPage extends StatelessWidget {
     );
   }
 }
+*/

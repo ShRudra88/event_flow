@@ -42,10 +42,11 @@ class _BottomBarViewState extends State<BottomBarView> {
     }
 
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.blueGrey),
       bottomNavigationBar: Container(
         child: BottomNavigationBar(
           onTap: onItemTapped,
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.white,
           selectedItemColor: Colors.black,
           currentIndex: currentIndex,
           type: BottomNavigationBarType.fixed,

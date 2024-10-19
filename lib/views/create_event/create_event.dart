@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,6 +10,8 @@ import '../../helping_widgets/common_gradient_backgroud.dart';
 
 class CreateEventView extends StatelessWidget {
   final AddEventController controller = Get.put(AddEventController());
+  TextEditingController location=TextEditingController();
+  TextEditingController title=TextEditingController();
 
   CreateEventView({super.key});
 
@@ -20,34 +24,52 @@ class CreateEventView extends StatelessWidget {
     }
   }
 
+  Future<void> addevent(String title,String location) async
+  {
+    DatabaseReference ref=await FirebaseDatabase.instance.ref("user");
+    var user=await FirebaseAuth.instance.currentUser;
+    String user_name=(user!.email!).split("@").first;
+    await ref.child("$user_name").set({
+      "title":title,
+      "location":location,
+      "is_verified":"No",
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Event'),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
         actions: [
           TextButton(
             onPressed: () {
               // Add the new event using the controller
-              controller.addEvent(
-                controller.titleController.text,
-                DateFormat('dd MMM yyyy').format(controller.startDate.value),
-              );
+              addevent(title.text, location.text);
+
 
               // Navigate back to HomeScreen
               Get.back();
             },
-            child: const Text('Create', style: TextStyle(color: Colors.blue)),
+            child: const Text('Create', style: TextStyle(color: Colors.black)),
           ),
         ],
       ),
+
       body: SingleChildScrollView(
+
         child: Container(
+
           decoration: gradientBackground(), // Applying the gradient background
           padding: const EdgeInsets.all(16.0),
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
+
               GestureDetector(
                 onTap: _pickImage,
                 child: Obx(() {
@@ -72,8 +94,9 @@ class CreateEventView extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text('Choose a Catchy Title!', style: TextStyle(fontSize: 18, color: Colors.white)),
+
               TextField(
-                controller: controller.titleController,
+                controller: title,
                 decoration: const InputDecoration(
                   hintText: 'Event Title',
                   hintStyle: TextStyle(color: Colors.white54),
@@ -87,14 +110,21 @@ class CreateEventView extends StatelessWidget {
                 style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16),
-              const Text('Where can we find you?', style: TextStyle(fontSize: 18, color: Colors.white)),
-              TextButton(
-                onPressed: () {
-                  // Logic to pick location
-                },
-                child: const Text('Pick Location', style: TextStyle(color: Colors.blue)),
+              TextField(
+                controller: location,
+                decoration: const InputDecoration(
+                  hintText: 'Location',
+                  hintStyle: TextStyle(color: Colors.white54),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blueAccent),
+                  ),
+                ),
+                style: const TextStyle(color: Colors.white),
               ),
-              const SizedBox(height: 16),
+
               Row(
                 children: [
                   Expanded(

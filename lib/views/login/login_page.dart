@@ -30,6 +30,10 @@ class LoginPage extends StatelessWidget {
     }
   }
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +81,7 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   _login(context); // Trigger login with Firebase
+
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
@@ -88,9 +93,12 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(color: Colors.deepPurple),
                 ),
               ),
+
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
+                  //loginAdmin(context);
+
                   Get.to(() => const BottomBarView(isAdmin: true)); // Admin login
                 },
                 child: const Text(
@@ -101,7 +109,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
-                  Get.to(() => const SignUpPage()); // Navigate to Sign Up
+                  Get.to(() => SignUpPage()); // Navigate to Sign Up
                 },
                 child: const Text(
                   'Sign Up',

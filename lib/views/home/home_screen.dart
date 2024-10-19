@@ -1,13 +1,66 @@
 import 'package:event_flow/controller/creat_event_controller.dart';
 import 'package:event_flow/views/login/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatelessWidget {
-  final bool showLoginButton;  // New parameter to determine whether to show the login button
+
+class HomeScreen extends StatefulWidget
+{
+  final bool showLoginButton;
+  HomeScreen({super.key, this.showLoginButton = false});
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _HomeScreen();
+  }
+
+}
+
+class _HomeScreen extends State<HomeScreen> {
+   // New parameter to determine whether to show the login button
   final AddEventController controller = Get.find<AddEventController>();
 
-  HomeScreen({super.key, this.showLoginButton = false});  // Default to false if not provided
+  List<String> title=[];
+  List<String> location=[];
+
+  //HomeScreen({super.key, this.showLoginButton = false});
+
+
+  // Default to false if not provided
+
+  Future<void> getinfo()async{
+  DatabaseReference ref=await FirebaseDatabase.instance.ref("user");
+  var user=await FirebaseAuth.instance.currentUser;
+  String user_name=(user!.email!).split("@").first;
+
+  String x=(await ref.child("$user_name/title").get()).value.toString();
+  String y=(await ref.child("$user_name/location").get()).value.toString();
+  String z=(await ref.child("$user_name/is_verified").get()).value.toString();
+  if(z=="YES" || z=="Yes" || z=="yes")
+    {
+      setState(()
+      {
+        title.add(x);
+        location.add(y);
+      });
+    }
+  else
+    {
+      setState(() {
+        title.clear();
+        location.clear();
+      });
+    }
+}
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getinfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +69,16 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Homepage'),
-          backgroundColor: Colors.yellow,
+          backgroundColor: Colors.blue,
+          centerTitle: true,
         ),
         body: Container(
           decoration: const BoxDecoration(
             gradient: RadialGradient(
               colors: [
-                Color(0xFFcb6ce6),  // Light purple
-                Color(0xFF6a4bc3),  // Intermediate purple
-                Color(0xFF004aad),  // Dark blue
+                Color(0xff2d9510),
+                Color(0xff65c34b),
+                Color(0xff5900ad),
               ],
               radius: 1.2,
               center: Alignment(0.0, 0.0),
@@ -49,22 +103,10 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Expanded(
-                child: Obx(() {
-                  if (controller.events.isEmpty) {
-                    return const Center(
-                      child: Text(
-                        "No events scheduled yet.",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    );
-                  } else {
-                    return ListView.builder(
-                      itemCount: controller.events.length,
+                child: Container(
+                    child:ListView.builder(
+                      itemCount: title.length,
                       itemBuilder: (context, index) {
-                        final event = controller.events[index];
                         return Card(
                           color: Colors.white.withOpacity(0.85),
                           margin: const EdgeInsets.symmetric(vertical: 10),
@@ -77,15 +119,15 @@ class HomeScreen extends StatelessWidget {
                               vertical: 10, horizontal: 15,
                             ),
                             title: Text(
-                              event['title'],
+                              title[index],
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF004aad),
+                                color: Colors.black,
                               ),
                             ),
                             subtitle: Text(
-                              event['date'],
+                              location[index],
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.black54,
@@ -100,13 +142,12 @@ class HomeScreen extends StatelessWidget {
                             },
                           ),
                         );
-                      },
-                    );
-                  }
-                }),
+                      }
+                      )
+                    )
               ),
               const Spacer(),
-              if (showLoginButton) // Conditionally show the login button
+              if (widget.showLoginButton) // Conditionally show the login button
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
